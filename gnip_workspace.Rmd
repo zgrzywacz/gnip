@@ -1,0 +1,49 @@
+---
+title: "gnip_workspace"
+author: "Zack Grzywacz"
+date: "April 22, 2021"
+output: html_document
+---
+
+```{r}
+library(lubridate)
+library(treeclim)
+```
+
+
+```{r}
+gnip <- read.csv("CG_GNIP.csv")
+gnip$Date <- mdy(gnip$Date)
+```
+
+```{r}
+gnip$Date
+```
+
+
+```{r}
+clim <- read.csv("silo_monthly_1958_2019.csv")
+```
+
+```{r}
+clim$Date <- paste0(clim$month,"/1/",clim$year)
+clim$Date <- mdy(clim$Date)
+```
+
+
+```{r}
+gnip_compare <- na.omit(merge(clim,gnip,by="Date"))
+```
+
+```{r}
+cor(gnip_compare$O18, gnip_compare$temp)
+```
+
+Now, do the same thing except find temp and precip values for the Ocean
+
+
+
+
+
+
+
